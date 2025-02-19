@@ -1,0 +1,14 @@
+# Please do not use this ignore file to define platform specific files.
+#
+# For these purposes create a global .gitignore file, which is a list of rules
+# for ignoring files in every Git repository on your computer.
+#
+# https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
+
+.env
+package-lock.json
+sequelize-meta.json
+sequelize-data.json
+node_modules/
+config/config.js
+config/config.dev.js
