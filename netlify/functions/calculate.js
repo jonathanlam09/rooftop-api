@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
 
         const { bill } = JSON.parse(event.body);
         if (!bill) {
-            throw new Error(`Something went wrong. bill: ${bill}` );
+            throw new Error(`Something went wrong.` );
         }
 
         // const tnb_tariff = await Constants.findOne({
