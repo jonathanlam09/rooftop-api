@@ -79,7 +79,8 @@ exports.handler = async (event, context) => {
         headers: {
             "Access-Control-Allow-Origin": "https://rooftop-energy-sdn-bhd.netlify.app",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization"
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true"
         },
         body: JSON.stringify(ret)
     };
