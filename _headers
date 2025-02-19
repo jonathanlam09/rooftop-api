@@ -1,8 +1,8 @@
 /*
   Cache-Control: no-cache
-  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Origin: https://rooftop-energy-sdn-bhd.netlify.app/
 
 /.netlify/functions/*
-  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Origin: https://rooftop-energy-sdn-bhd.netlify.app/
   Access-Control-Allow-Headers: Content-Type, Authorization
   Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
