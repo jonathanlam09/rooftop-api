@@ -1,6 +1,4 @@
 const { checkSchema, validationResult } = require('express-validator');
-const ConsumerContactForm = require('../../model/ConsumerContactForm');
-
 exports.handler = async (event, context) => {
     let ret = {
         status: false

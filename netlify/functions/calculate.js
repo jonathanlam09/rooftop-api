@@ -1,6 +1,4 @@
 
-const Constants = require('../../model/Constants');
-
 exports.handler = async (event, context) => {
     let ret = {
         status: false
