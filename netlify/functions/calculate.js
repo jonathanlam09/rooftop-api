@@ -11,6 +11,8 @@ exports.handler = async (event, context) => {
         }
 
         const { bill } = JSON.parse(event.body);
+        ret.error = event.body;
+        throw new Error('tesitng');
         if (!bill) {
             throw new Error('Something went wrong.');
         }
