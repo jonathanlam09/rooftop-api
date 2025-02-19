@@ -53,7 +53,7 @@ app.use(express.json({
 }));
 
 app.use(express.urlencoded({ limit: '10mb', extended: false }));
-app.use('/api', router);
+app.use('/', router);
 app.use(express.static(path.join(__dirname, '/')));
 
 async function clearTransactionConnection() {
