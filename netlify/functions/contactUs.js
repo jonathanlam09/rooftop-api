@@ -53,18 +53,15 @@ exports.handler = async (event, context) => {
 
         const { fullname, email, contact } = body;
 
-        const contactForm = new ConsumerContactForm();
-        contactForm.fullname = fullname;
-        contactForm.email = email;
-        contactForm.contact = contact;
-
-        await contactForm.save();
-
+        // const contactForm = new ConsumerContactForm();
+        // contactForm.fullname = fullname;
+        // contactForm.email = email;
+        // contactForm.contact = contact;
+        // await contactForm.save();
         ret.status = true;
     } catch (err) {
         ret.error = err.message;
     }
-
     return {
         statusCode: 200,
         body: JSON.stringify(ret)
