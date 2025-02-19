@@ -21,8 +21,8 @@ exports.handler = async (event, context) => {
         if (event.httpMethod !== 'POST') {
             throw new Error('Invalid HTTP method.');
         }
-        throw new Error(event.body)
         const body = JSON.parse(event.body);
+        const { fullname, email, contact } = body;
         const validationErrors = [];
 
         if (!fullname || typeof fullname !== 'string') {
@@ -45,7 +45,6 @@ exports.handler = async (event, context) => {
             ret.validationError = validationErrors;
             throw new Error('Please complete all required fields.');
         }
-        const { fullname, email, contact } = body;
 
         // const contactForm = new ConsumerContactForm();
         // contactForm.fullname = fullname;
