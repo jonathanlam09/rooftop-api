@@ -21,47 +21,30 @@ exports.handler = async (event, context) => {
         if (event.httpMethod !== 'POST') {
             throw new Error('Invalid HTTP method.');
         }
-
+        throw new Error(event.body)
         const body = JSON.parse(event.body);
-        const validator_res = await checkSchema({
-            fullname: {
-                notEmpty: {
-                    errorMessage: "Full name is required."
-                },
-                isString: {
-                    errorMessage: "Full name must be a string."
-                }
-            },
-            email: {
-                notEmpty: {
-                    errorMessage: "Email is required."
-                },
-                isEmail: {
-                    errorMessage: "Invalid email format."
-                }
-            },
-            contact: {
-                notEmpty: {
-                    errorMessage: "Contact number is required."
-                },
-                matches: {
-                    options: [/^(?:\+?60|0)[1-9]\d{7,8}$/],
-                    errorMessage: "Invalid Malaysian phone number format."
-                }
-            }
-        }).run(body);
+        const validationErrors = [];
 
-        const result = validationResult(body);
-        const validationError = new Set();
-
-        if (result && result.errors && result.errors.length > 0) {
-            Object.keys(result.errors).forEach((el) => {
-                validationError.add(result.errors[el].path);
-            });
-            ret.validationError = [...validationError];
-            throw new Error('Please complete all fields.');
+        if (!fullname || typeof fullname !== 'string') {
+            validationErrors.push('fullname');
         }
 
+        if (!email) {
+            validationErrors.push('email'); 
+        } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            validationErrors.push('email-format');
+        }
+
+        if (!contact) {
+            validationErrors.push('contact');
+        } else if (!/^(?:\+?60|0)[1-9]\d{7,8}$/.test(contact)) {
+            validationErrors.push('contact-format');
+        }
+
+        if(validationErrors.length > 0) {
+            ret.validationError = validationErrors;
+            throw new Error('Please complete all required fields.');
+        }
         const { fullname, email, contact } = body;
 
         // const contactForm = new ConsumerContactForm();
