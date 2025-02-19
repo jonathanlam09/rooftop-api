@@ -15,17 +15,23 @@ app.use(fileUpload({
     tempFileDir: os.tmpdir()
 }));
 
-let origin_allow = JSON.parse(process.env.CORS_ORIGIN);
+// let origin_allow = JSON.parse(process.env.CORS_ORIGIN);
+
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         if (!origin) return callback(null, true);
+//         if (origin_allow.includes(origin)) {
+//             return callback(null, true);
+//         }
+//         return callback(new Error('CORS origin access denied'), false);
+//     },
+//     credentials: true
+// }));
 
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (origin_allow.includes(origin)) {
-            return callback(null, true);
-        }
-        return callback(new Error('CORS origin access denied'), false);
-    },
-    credentials: true
+    origin: "*",  // Allow all origins
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
 }));
 
 app.use((req, res, next) => {
