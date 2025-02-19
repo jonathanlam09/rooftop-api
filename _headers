@@ -1,0 +1,8 @@
+/*
+  Cache-Control: no-cache
+  Access-Control-Allow-Origin: *
+
+/.netlify/functions/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Headers: *
+  Access-Control-Allow-Methods: *
