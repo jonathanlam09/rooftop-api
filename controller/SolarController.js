@@ -1,6 +1,5 @@
 const Constants = require("../model/Constants");
 
-
 class SolarController {
     static calculate = async (req, res) => {
         var ret = {
@@ -17,45 +16,50 @@ class SolarController {
                 throw new Error('Something went wrong.');
             }
 
-            const tnb_tariff = await Constants.findOne({
-                where: {
-                    constant: 'tnb_tariff',
-                    active: 1
-                }
-            });
-            if(!tnb_tariff) {
-                throw new Error('Something went wrong.');
-            }
+            // const tnb_tariff = await Constants.findOne({
+            //     where: {
+            //         constant: 'tnb_tariff',
+            //         active: 1
+            //     }
+            // });
+            // if(!tnb_tariff) {
+            //     throw new Error('Something went wrong.');
+            // }
 
-            const solar_panel_cost = await Constants.findOne({
-                where: {
-                    constant: 'solar_panel_cost',
-                    active: 1
-                }
-            });
-            if(!solar_panel_cost) {
-                throw new Error('Something went wrong.');
-            }
+            // const solar_panel_cost = await Constants.findOne({
+            //     where: {
+            //         constant: 'solar_panel_cost',
+            //         active: 1
+            //     }
+            // });
+            // if(!solar_panel_cost) {
+            //     throw new Error('Something went wrong.');
+            // }
 
-            const annual_interest = await Constants.findOne({
-                where: {
-                    constant: 'annual_interest',
-                    active: 1
-                }
-            });
-            if(!annual_interest) {
-                throw new Error('Something went wrong.');
-            }
+            // const annual_interest = await Constants.findOne({
+            //     where: {
+            //         constant: 'annual_interest',
+            //         active: 1
+            //     }
+            // });
+            // if(!annual_interest) {
+            //     throw new Error('Something went wrong.');
+            // }
 
-            const monthly_energy = bill / tnb_tariff.value;
+            // const monthly_energy = bill / tnb_tariff.value;
+            const monthly_energy = bill / 0.509;
             const daily_energy = monthly_energy/30;
             const system_size = daily_energy/(3 * .8);
-            const total_system_cost = system_size * solar_panel_cost.value
+            // const total_system_cost = system_size * solar_panel_cost.value
+            const total_system_cost = system_size * 3000;
 
             const principal = total_system_cost * .7;
             // 3 months, 6 months, 12 months, 24months repayment term
             const terms_duration = [3, 6, 12, 24]; 
-            const rate = annual_interest.value;
+
+            // const rate = annual_interest.value;
+            const rate = 0.05;
+            
             const monthlyRate = rate / 12;
             var schedules = {};
             for(var i=0;i<terms_duration.length;i++) {
