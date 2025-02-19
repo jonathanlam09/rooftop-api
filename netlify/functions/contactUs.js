@@ -4,12 +4,26 @@ exports.handler = async (event, context) => {
         status: false
     };
 
+    if (event.httpMethod === "OPTIONS") {
+        return {
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "https://rooftop-energy-sdn-bhd.netlify.app",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                "Access-Control-Allow-Credentials": "true"
+            },
+            body: JSON.stringify({ status: "Preflight OK" })
+        };
+    }
+
     try {
         if (event.httpMethod !== 'POST') {
             throw new Error('Invalid HTTP method.');
         }
 
         const body = JSON.parse(event.body);
+        throw new Error(body.fullname)
         const validator_res = await checkSchema({
             fullname: {
                 notEmpty: {
@@ -32,7 +46,7 @@ exports.handler = async (event, context) => {
                     errorMessage: "Contact number is required."
                 },
                 matches: {
-                    options: [/^(?:\+?60|0)[1-9]\d{7,8}$/], // Malaysian phone number regex
+                    options: [/^(?:\+?60|0)[1-9]\d{7,8}$/],
                     errorMessage: "Invalid Malaysian phone number format."
                 }
             }

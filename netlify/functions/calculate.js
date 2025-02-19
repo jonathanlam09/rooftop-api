@@ -4,6 +4,19 @@ exports.handler = async (event, context) => {
         status: false
     };
 
+    if (event.httpMethod === "OPTIONS") {
+        return {
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "https://rooftop-energy-sdn-bhd.netlify.app",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                "Access-Control-Allow-Credentials": "true"
+            },
+            body: JSON.stringify({ status: "Preflight OK" })
+        };
+    }
+    
     try {
         console.log('[Commencing] calculate');
         if (event.httpMethod !== 'POST') {
@@ -11,7 +24,7 @@ exports.handler = async (event, context) => {
         }
 
         const { bill } = JSON.parse(event.body);
-        if (!bill) {
+        if (bill == null) {
             throw new Error(`Something went wrong.` );
         }
 
