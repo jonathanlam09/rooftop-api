@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
         }
 
         const body = JSON.parse(event.body);
-        throw new Error(body.fullname)
+        throw new Error(event.body)
         const validator_res = await checkSchema({
             fullname: {
                 notEmpty: {
