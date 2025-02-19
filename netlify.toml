@@ -1,6 +1,8 @@
-[[headers]]
-  for = "/functions/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "*"
-    Access-Control-Allow-Headers = "*"
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
